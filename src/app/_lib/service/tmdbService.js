@@ -61,7 +61,7 @@ export const tmdbService = {
 
     getAnimeTVShow: async (page = 1) => {
         try {
-            const response = await fetch(`${baseUrl}/discover/tv?include_adult=false&api_key=${KEY}&language=vi-VN&page=${page}`)
+            const response = await fetch(`${baseUrl}/discover/tv?include_adult=false&api_key=${KEY}&with_keywords=210024&language=vi-VN&page=${page}`)
             if (!response.ok) {
                 throw new Error(`TMDB error: ${response.status}`)
             }

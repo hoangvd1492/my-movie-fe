@@ -33,7 +33,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "src/app/component/ui/HorizontalScrollDiv.jsx"
   ],
   "exclude": [
     "node_modules"

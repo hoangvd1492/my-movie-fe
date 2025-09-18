@@ -2,15 +2,16 @@ import { tmdbService } from "@/app/_lib/service/tmdbService"
 import { Card } from "./Card";
 import { Horizontal } from "./Horizontal";
 
-export const Movie = async () => {
+export const TVShow = async () => {
 
-    const movieList = await tmdbService.getMovie()
-    console.log(movieList.data);
+    const movieList = await tmdbService.getTVShow()
+    console.log(movieList);
+
 
     return (
-        <section className="w-full  text-body" id="movie">
+        <section className="w-full  text-body " id="tv-show">
             <div className="font-[700] text-xl">
-                Phim Điện Ảnh:
+                TV Show:
             </div>
             <Horizontal>
                 <div className="flex flex-row gap-4 w-full items-center p-8">
