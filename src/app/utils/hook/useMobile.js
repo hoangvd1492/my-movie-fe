@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 const useMobileDetect = () => {
-    const [isMoblie, setIsMobile] = useState(null);
+    const [isMoblie, setIsMobile] = useState(false);
 
     useEffect(() => {
         const detect = () => {

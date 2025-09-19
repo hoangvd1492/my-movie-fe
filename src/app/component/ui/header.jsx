@@ -39,22 +39,22 @@ export const Header = ({ genres = [] }) => {
             <div className={`flex flex-col gap-2 ${transpentBg && !openDropDown ? 'backdrop-blur-xl' : 'bg-primary'}  text-header relative`}>
                 <div className=" p-2 px-8 text-xl flex flex-row justify-between items-center max-xl:justify-end max-xl:px-2">
                     <div className="flex flex-row gap-1 max-xl:hidden">
-                        <Link href={'#movie'}>
+                        <Link href={'/movies'}>
                             <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
                                 Phim Điện Ảnh
                             </div></Link>
 
-                        <Link href={'#tv-show'}>
+                        <Link href={'/tvshow'}>
                             <div className="font-[500]  py-2  px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
                                 Phim Bộ
                             </div>
                         </Link>
-                        <Link href={'#anime'}>
+                        <Link href={'/anime'}>
                             <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
                                 Anime
                             </div>
                         </Link>
-                        <Link href={'#anime-show'}>
+                        <Link href={'/animeshow'}>
                             <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
                                 AnimeTV
                             </div>
@@ -92,22 +92,22 @@ export const Header = ({ genres = [] }) => {
                 </div>
                 {openDropDown && <div className="absolute top-[100%] flex flex-col gap-1 hidden max-xl:block border-t-1 border-foreground bg-primary w-full">
 
-                    <Link href={'#movie'}>
+                    <Link href={'/movies'}>
                         <div className=" text-end font-[500] p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Phim Điện Ảnh
                         </div>
                     </Link>
-                    <Link href={'#tv-show'}>
+                    <Link href={'/tvshow'}>
                         <div className="text-end font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Phim Bộ
                         </div>
                     </Link>
-                    <Link href={'#anime'}>
+                    <Link href={'/anime'}>
                         <div className=" text-end font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Anime
                         </div>
                     </Link>
-                    <Link href={'#anime-show'}>
+                    <Link href={'/animeshow'}>
                         <div className=" text-end font-[500]  p-4 cursor-pointer hover:bg-primary-hover">
                             Thể loại
                         </div>
@@ -118,7 +118,7 @@ export const Header = ({ genres = [] }) => {
                             genres.map((genres, i) => {
                                 return (
                                     <Link key={i} href={`/genres/${genres.id}`}>
-                                        <div className='p-2 hover:bg-primary-hover font-[500] cursor-pointer text-end'>{genres.name}</div>
+                                        <div className='p-2 hover:bg-primary-hover font-[500] cursor-pointer text-end' onClick={() => setOpenDropDown(false)}>{genres.name}</div>
                                     </Link>
                                 )
                             })

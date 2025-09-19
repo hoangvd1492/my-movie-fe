@@ -18,15 +18,15 @@ export const Horizontal = ({ children }) => {
         const options = {
             root: divRef.current,
             rootMargin: "0px",
-            threshold: 0.5,
+            threshold: 0,
         };
 
         const callback = (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.remove("scale-80");
+                    entry.target.classList.add("scale-110");
                 } else {
-                    entry.target.classList.add("scale-80");
+                    entry.target.classList.remove("scale-110");
                 }
             });
         };
@@ -39,12 +39,12 @@ export const Horizontal = ({ children }) => {
         return () => {
             observer.disconnect();
         };
-    }, []);
+    }, [isMoblie]);
 
     const handleClickScrollPre = () => {
         if (divRef.current) {
             const start = divRef.current.scrollLeft;
-            const end = start - 432;
+            const end = start - 464;
             const duration = 500;
             let startTime = null;
 
@@ -68,7 +68,7 @@ export const Horizontal = ({ children }) => {
     const handleClickScrollNext = () => {
         if (divRef.current) {
             const start = divRef.current.scrollLeft;
-            const end = start + 432;
+            const end = start + 464;
             const duration = 500;
             let startTime = null;
 
@@ -92,13 +92,12 @@ export const Horizontal = ({ children }) => {
     return (
         isMoblie ?
 
-            <div className="overflow-x-auto scrollbar-hide" ref={divRef}>
+            <div className="overflow-x-auto scrollbar-hide ">
                 {children}
             </div>
-
             :
-            <div className="relative">
-                <div className="absolute top-[calc(50%-75px)] left-[5px] h-[50px] w-[50px] bg-primary z-10 rounded-[50%] text-[white] flex justify-center items-center cursor-pointer hover:scale-110 transition-all"
+            <div className="relative px-16">
+                <div className="absolute top-[calc(50%-75px)] left-0 h-[50px] w-[50px] bg-primary z-10 rounded-[50%] text-[white] flex justify-center items-center cursor-pointer hover:scale-110 transition-all"
                     onClick={handleClickScrollPre}
                 >
                     <ChevronsLeft />
@@ -106,15 +105,12 @@ export const Horizontal = ({ children }) => {
                 <div className="overflow-x-hidden" ref={divRef}>
                     {children}
                 </div>
-                <div className="absolute top-[calc(50%-75px)] right-[-5px] h-[50px] w-[50px] bg-primary z-10 rounded-[50%] text-[white] flex justify-center items-center cursor-pointer hover:scale-110 transition-all"
+                <div className="absolute top-[calc(50%-75px)] right-0 h-[50px] w-[50px] bg-primary z-10 rounded-[50%] text-[white] flex justify-center items-center cursor-pointer hover:scale-110 transition-all"
                     onClick={handleClickScrollNext}
                 >
                     <ChevronsRight />
                 </div>
             </div>
-
-
-
     )
 
 }

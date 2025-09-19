@@ -30,10 +30,19 @@
   --body-text: #9147ff;
 }
 
-html {
-  scroll-behavior: smooth;
+:root {
+  --auto-fit: repeat(auto-fit, minmax(150px, 1fr));
+  --swing: swing .5s ease-in-out infinite;
 }
 
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
 
 body {
   background: var(--background);
@@ -70,4 +79,25 @@ body {
 .genres-dropdown:hover::before {
   display: block;
   pointer-events: auto;
+}
+
+.loading {
+  animation: loading 2s infinite ease-in-out;
+}
+
+
+@keyframes loading {
+  0% {
+    opacity: 0.5;
+
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
 }
