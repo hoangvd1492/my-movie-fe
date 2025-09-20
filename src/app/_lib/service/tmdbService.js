@@ -73,6 +73,20 @@ export const tmdbService = {
         }
     },
 
+    getPopularMovie: async () => {
+        try {
+            const response = await fetch(`${baseUrl}/movie/popular?include_adult=false&api_key=${KEY}&language=vi-VN&page=1`)
+            if (!response.ok) {
+                throw new Error(`TMDB error: ${response.status}`)
+            }
+            const json = await response.json()
+            return { page: json.page, total: json.total_pages, data: json.results }
+        } catch (err) {
+            console.error("Failed to fetch anime tvshow:", err)
+            return { page: 0, total: 0, data: [] }
+        }
+    },
+
     getMovieByGenres: async (page = 1, genres) => {
         try {
             const response = await fetch(`${baseUrl}/discover/movie?include_adult=false&api_key=${KEY}&language=vi-VN&with_genres=${genres}&page=${page}`)
@@ -80,8 +94,35 @@ export const tmdbService = {
                 throw new Error(`TMDB error: ${response.status}`)
             }
             const json = await response.json()
-            console.log(json);
             return { page: json.page, total: json.total_pages, data: json.results }
+        } catch (err) {
+            console.error("Failed to fetch movie:", err)
+            return { page: 0, total: 0, data: [] }
+        }
+    },
+
+    getDetailMovie: async (id) => {
+        try {
+            const response = await fetch(`${baseUrl}/movie/${id}?&api_key=${KEY}&append_to_response=images,videos&language=vi-VN`)
+            if (!response.ok) {
+                throw new Error(`TMDB error: ${response.status}`)
+            }
+            const json = await response.json()
+            return json
+        } catch (err) {
+            console.error("Failed to fetch movie:", err)
+            return null
+        }
+    },
+
+    search: async (page = 1, query) => {
+        try {
+            const response = await fetch(`${baseUrl}/search/multi?include_adult=false&api_key=${KEY}&language=vi-VN&query=${query}&page=${page}`)
+            if (!response.ok) {
+                throw new Error(`TMDB error: ${response.status}`)
+            }
+            const json = await response.json()
+            return { page: json.page, total: json.total_pages, data: json.results.filter(m => m.media_type !== 'person') }
         } catch (err) {
             console.error("Failed to fetch movie:", err)
             return { page: 0, total: 0, data: [] }

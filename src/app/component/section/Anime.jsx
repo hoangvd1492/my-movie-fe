@@ -10,7 +10,7 @@ export const Anime = async () => {
     return (
         <section className="w-full  text-body" id="anime">
             <Link href={`/anime`}>
-                <div className="font-[700] text-xl flex flex-row gap-2 items-center bg-primary w-fit text-header py-2 px-4 rounded-[4px] cursor-pointer hover:shadow-[0_0_10px_0_rgba(0,0,0,0.3)] shadow-primary">
+                <div className="font-[700] text-xl flex flex-row gap-2 items-center bg-primary w-fit text-[white] py-2 px-4 rounded-[4px] cursor-pointer hover:shadow-[0_0_10px_0_rgba(0,0,0,0.3)] shadow-primary">
                     <span>Anime</span><ChevronRight />
                 </div>
             </Link>

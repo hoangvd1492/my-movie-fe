@@ -3,11 +3,13 @@ import { Menu, Search, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
 import { ThemeBtn } from '../theme/ThemeButton';
+import { useRouter } from 'next/navigation';
 
 export const Header = ({ genres = [] }) => {
 
-    const [openDropDown, setOpenDropDown] = useState(false)
+    const router = useRouter()
 
+    const [openDropDown, setOpenDropDown] = useState(false)
     const [transpentBg, setTranspentBg] = useState(false)
 
 
@@ -31,47 +33,59 @@ export const Header = ({ genres = [] }) => {
         }
     }, [])
 
+    const [searchText, setSearchText] = useState('')
 
+    const handleSearch = () => {
+        if (!searchText.trim()) return
+        router.push(`/search?q=${searchText}`)
+    }
 
 
     return (
         <header className='sticky top-0 w-full z-999'>
-            <div className={`flex flex-col gap-2 ${transpentBg && !openDropDown ? 'backdrop-blur-xl' : 'bg-primary'}  text-header relative`}>
+            <div className={`flex flex-col gap-2 ${transpentBg && !openDropDown ? 'backdrop-blur-xl text-primary' : 'bg-primary'}  text-[white] relative`}>
                 <div className=" p-2 px-8 text-xl flex flex-row justify-between items-center max-xl:justify-end max-xl:px-2">
-                    <div className="flex flex-row gap-1 max-xl:hidden">
-                        <Link href={'/movies'}>
-                            <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
-                                Phim Điện Ảnh
-                            </div></Link>
+                    <div className='flex flex-row gap-2 items-center'>
+                        <Link href={'/'}>
+                            <div className="font-[500] text-2xl py-2 px-4 cursor-pointer ">
+                                Trang chủ
+                            </div>
+                        </Link>
+                        <div className="flex flex-row gap-1 max-xl:hidden">
+                            <Link href={'/movies'}>
+                                <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
+                                    Phim Điện Ảnh
+                                </div></Link>
 
-                        <Link href={'/tvshow'}>
-                            <div className="font-[500]  py-2  px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
-                                Phim Bộ
-                            </div>
-                        </Link>
-                        <Link href={'/anime'}>
-                            <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
-                                Anime
-                            </div>
-                        </Link>
-                        <Link href={'/animeshow'}>
-                            <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
-                                AnimeTV
-                            </div>
-                        </Link>
+                            <Link href={'/tvshow'}>
+                                <div className="font-[500]  py-2  px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
+                                    Phim Bộ
+                                </div>
+                            </Link>
+                            <Link href={'/anime'}>
+                                <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
+                                    Anime
+                                </div>
+                            </Link>
+                            <Link href={'/animeshow'}>
+                                <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
+                                    AnimeTV
+                                </div>
+                            </Link>
 
-                        <div className="genres-dropdown group relative font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
-                            Thể loại
-                            <div className='hidden group-hover:grid absolute top-[130%] left-0 w-[600px] bg-primary p-2 grid grid-cols-3 gap-2 text-sm '>
-                                {
-                                    genres.map((genres, i) => {
-                                        return (
-                                            <Link key={i} href={`/genres/${genres.id}`}>
-                                                <div className='p-2 cursor-pointer hover:bg-primary-hover'>{genres.name}</div>
-                                            </Link>
-                                        )
-                                    })
-                                }
+                            <div className="genres-dropdown group relative font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
+                                Thể loại
+                                <div className='hidden group-hover:grid absolute top-[130%] left-0 w-[600px] bg-primary p-2 grid grid-cols-3 gap-2 text-sm '>
+                                    {
+                                        genres.map((genres, i) => {
+                                            return (
+                                                <Link key={i} href={`/genres/${genres.id}`}>
+                                                    <div className='p-2 cursor-pointer hover:bg-primary-hover'>{genres.name}</div>
+                                                </Link>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,8 +93,13 @@ export const Header = ({ genres = [] }) => {
                     <div className='flex flex-row gap-4 items-center max-md:grow'>
                         <div className='flex flex-row gap-4 items-center max-md:grow'>
 
-                            <input type="text" className='border-2 rounded-[4px] border-foreground px-4 py-2  max-md:grow text-base ' placeholder='Tìm kiếm. . .' />
-                            <div className='hover:scale-105 cursor-pointer'>
+                            <input type="text" className='text-white border-2 rounded-[4px] border-primary px-4 py-2  max-md:grow text-base ' placeholder='Tìm kiếm. . .'
+                                value={searchText}
+                                onChange={(e) => setSearchText(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.code == 'Enter') handleSearch()
+                                }} />
+                            <div className='hover:scale-105 cursor-pointer' onClick={handleSearch}>
                                 <Search />
                             </div>
                         </div>

@@ -3,22 +3,25 @@ import { Card } from "../ui/Card";
 import { Horizontal } from "../ui/Horizontal";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { Carousel } from "../ui/Carousel";
 
 export const Banner = async () => {
 
-    const movieList = await tmdbService.getMovie()
+    const movieList = await tmdbService.getPopularMovie()
 
-    const newestMovie = movieList.data[0]
+    const newestMovies = movieList.data.slice(0, 5)
 
 
-    if (!newestMovie) return null
+    if (!newestMovies.length) return null
 
-    console.log(newestMovie);
+    const detailsMovies = await Promise.all(
+        newestMovies.map((movie) => tmdbService.getDetailMovie(movie.id))
+    );
 
 
     return (
         <section className="w-full  text-body" id="banner">
-
+            <Carousel data={detailsMovies} />
         </section>
     )
 }

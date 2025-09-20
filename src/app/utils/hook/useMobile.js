@@ -7,7 +7,6 @@ const useMobileDetect = () => {
     useEffect(() => {
         const detect = () => {
             const width = window.innerWidth;
-
             if (width < 1025) {
                 setIsMobile(true);
             } else {

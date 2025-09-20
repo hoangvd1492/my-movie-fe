@@ -7,12 +7,14 @@ import { TVShow } from "./component/section/TvShow";
 export default function Home() {
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
       <Banner />
-      <Movie />
-      <TVShow />
-      <Anime />
-      <AnimeShow />
+      <div className="py-16 px-8 max-lg:px-2 text-primary">
+        <Movie />
+        <TVShow />
+        <Anime />
+        <AnimeShow />
+      </div>
     </div>
   );
 }

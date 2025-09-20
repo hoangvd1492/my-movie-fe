@@ -26,9 +26,9 @@ export default async function RootLayout({ children }) {
 
       >
         <ThemeProvider defaultTheme="dark">
-          <div className="min-h-[200vh] relative">
+          <div className="relative">
             <Header genres={genres} />
-            <div className="py-16 px-8 max-lg:px-2">
+            <div>
               {children}
             </div>
           </div>

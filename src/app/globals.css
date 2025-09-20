@@ -6,8 +6,15 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
-  --color-header: var(--header-text);
-  --color-body: var(--body-text)
+}
+
+@layer utilities {
+  .overview {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 .light {
@@ -15,9 +22,6 @@
   --foreground: #171717;
   --primary: #9147ff;
   --primary-hover: #680bf3;
-  /*color text*/
-  --header-text: #171717;
-  --body-text: #9147ff;
 
 }
 
@@ -26,8 +30,6 @@
   --foreground: #ededed;
   --primary: #9147ff;
   --primary-hover: #680bf3;
-  --header-text: #ffffff;
-  --body-text: #9147ff;
 }
 
 :root {
@@ -93,7 +95,7 @@ body {
   }
 
   50% {
-    transform: scale(1.2);
+    transform: scale(1.1);
     opacity: 1;
   }
 
