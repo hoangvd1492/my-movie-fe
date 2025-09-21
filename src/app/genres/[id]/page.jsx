@@ -34,7 +34,7 @@ export default async function Page({ params, searchParams }) {
 
 
     return (
-        <div className="text-primary flex flex-col items-center ">
+        <div className="text-primary flex flex-col items-center  py-16">
             <div className="font-[700] text-3xl text-primary self-start  w-fit text-header py-2 px-8">
                 <span>Genre: {existsGenres.name}</span>
             </div>

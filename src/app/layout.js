@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "./component/theme/ThemeProvider";
 import { Header } from "./component/ui/header";
 import { tmdbService } from "./_lib/service/tmdbService";
+import { Footer } from "./component/ui/footer";
 
 export const montserrat = Montserrat({
   subsets: ['latin'], // Specify required subsets
@@ -28,9 +29,10 @@ export default async function RootLayout({ children }) {
         <ThemeProvider defaultTheme="dark">
           <div className="relative">
             <Header genres={genres} />
-            <div>
+            <div className="min-h-screen">
               {children}
             </div>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>

@@ -47,8 +47,8 @@ export const Header = ({ genres = [] }) => {
                 <div className=" p-2 px-8 text-xl flex flex-row justify-between items-center  max-xl:px-2">
                     <div className='flex flex-row gap-2 items-center'>
                         <Link href={'/'} className='max-md:hidden'>
-                            <div className="font-[500] text-2xl py-2 px-4 cursor-pointer ">
-                                Trang chủ
+                            <div className="font-[700] text-2xl py-2 px-4 cursor-pointer ">
+                                MY MOVIE
                             </div>
                         </Link>
                         <div className="flex flex-row gap-1 max-xl:hidden">
@@ -90,10 +90,10 @@ export const Header = ({ genres = [] }) => {
                         </div>
                     </div>
 
-                    <div className='flex flex-row gap-4 items-center max-md:grow'>
-                        <div className='flex flex-row gap-4 items-center max-md:grow'>
+                    <div className='flex flex-row gap-4 items-center '>
+                        <div className='flex flex-row gap-4 items-center'>
 
-                            <input type="text" className='text-white border-2 rounded-[4px] border-primary px-4 py-2  max-md:grow text-base ' placeholder='Tìm kiếm. . .'
+                            <input type="text" className='text-white border-2 rounded-[4px] border-primary px-4 py-2  text-base ' placeholder='Tìm kiếm. . .'
                                 value={searchText}
                                 onChange={(e) => setSearchText(e.target.value)}
                                 onKeyDown={(e) => {
@@ -112,22 +112,22 @@ export const Header = ({ genres = [] }) => {
                 {openDropDown && <div className="absolute top-[100%] flex flex-col gap-1 hidden max-xl:block border-t-1 border-foreground bg-primary w-full">
 
                     <Link href={'/movies'}>
-                        <div className=" text-end font-[500] p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
+                        <div className=" font-[500] p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Phim Điện Ảnh
                         </div>
                     </Link>
                     <Link href={'/tvshow'}>
-                        <div className="text-end font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
+                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Phim Bộ
                         </div>
                     </Link>
                     <Link href={'/anime'}>
-                        <div className=" text-end font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
+                        <div className="  font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Anime
                         </div>
                     </Link>
                     <Link href={'/animeshow'}>
-                        <div className=" text-end font-[500]  p-4 cursor-pointer hover:bg-primary-hover">
+                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover">
                             Thể loại
                         </div>
                     </Link>
@@ -137,7 +137,7 @@ export const Header = ({ genres = [] }) => {
                             genres.map((genres, i) => {
                                 return (
                                     <Link key={i} href={`/genres/${genres.id}`}>
-                                        <div className='p-2 hover:bg-primary-hover font-[500] cursor-pointer text-end' onClick={() => setOpenDropDown(false)}>{genres.name}</div>
+                                        <div className='p-2 hover:bg-primary-hover font-[500] cursor-pointer' onClick={() => setOpenDropDown(false)}>{genres.name}</div>
                                     </Link>
                                 )
                             })
