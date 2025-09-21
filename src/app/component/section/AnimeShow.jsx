@@ -19,7 +19,7 @@ export const AnimeShow = async () => {
                 <div className="flex flex-row gap-8 max-lg:gap-4 w-full items-center p-8">
                     {movieList.data.map((movie, index) => {
                         return (
-                            <Card key={index} data={movie} />
+                            <Card key={index} data={movie} type={'tv'} />
                         )
                     })}
                 </div>

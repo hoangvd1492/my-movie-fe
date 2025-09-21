@@ -33,7 +33,7 @@
 }
 
 :root {
-  --auto-fit: repeat(auto-fit, minmax(150px, 1fr));
+  --auto-fit: repeat(auto-fit, minmax(150px, 170px));
   --swing: swing .5s ease-in-out infinite;
 }
 
@@ -86,6 +86,8 @@ body {
 .loading {
   animation: loading 2s infinite ease-in-out;
 }
+
+
 
 
 @keyframes loading {

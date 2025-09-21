@@ -30,12 +30,15 @@ export default async function Page({ params, searchParams }) {
         </div>)
     }
 
+    console.log(moviesList);
+
+
     return (
         <div className="text-primary flex flex-col items-center ">
             <div className="font-[700] text-3xl text-primary self-start  w-fit text-header py-2 px-8">
                 <span>Genre: {existsGenres.name}</span>
             </div>
-            <MovieList data={moviesList.data} />
+            <MovieList data={moviesList.data} type={'movie'} />
             <div className="w-fit">
                 <Pagination page={moviesList.page} total={moviesList.total} />
             </div>

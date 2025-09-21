@@ -32,6 +32,9 @@ export const Carousel = ({ data }) => {
             let startTime = null;
 
             const animateScroll = (timestamp) => {
+                if (!slider.current) {
+                    return;
+                }
                 if (!startTime) startTime = timestamp;
                 const progress = timestamp - startTime;
                 const percentage = Math.min(progress / duration, 1);

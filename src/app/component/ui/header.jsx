@@ -44,9 +44,9 @@ export const Header = ({ genres = [] }) => {
     return (
         <header className='sticky top-0 w-full z-999'>
             <div className={`flex flex-col gap-2 ${transpentBg && !openDropDown ? 'backdrop-blur-xl text-primary' : 'bg-primary'}  text-[white] relative`}>
-                <div className=" p-2 px-8 text-xl flex flex-row justify-between items-center max-xl:justify-end max-xl:px-2">
+                <div className=" p-2 px-8 text-xl flex flex-row justify-between items-center  max-xl:px-2">
                     <div className='flex flex-row gap-2 items-center'>
-                        <Link href={'/'}>
+                        <Link href={'/'} className='max-md:hidden'>
                             <div className="font-[500] text-2xl py-2 px-4 cursor-pointer ">
                                 Trang chủ
                             </div>
@@ -75,7 +75,7 @@ export const Header = ({ genres = [] }) => {
 
                             <div className="genres-dropdown group relative font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
                                 Thể loại
-                                <div className='hidden group-hover:grid absolute top-[130%] left-0 w-[600px] bg-primary p-2 grid grid-cols-3 gap-2 text-sm '>
+                                <div className='text-[white] hidden group-hover:grid absolute top-[130%] left-0 w-[600px] bg-primary p-2 grid grid-cols-3 gap-2 text-sm '>
                                     {
                                         genres.map((genres, i) => {
                                             return (
@@ -132,7 +132,7 @@ export const Header = ({ genres = [] }) => {
                         </div>
                     </Link>
 
-                    <div className='w-full bg-primary p-2 grid grid-cols-3 gap-2 text-sm  border-t-1 border-foreground'>
+                    <div className=' text-[white] w-full bg-primary p-2 grid grid-cols-3 gap-2 text-sm  border-t-1 border-foreground'>
                         {
                             genres.map((genres, i) => {
                                 return (

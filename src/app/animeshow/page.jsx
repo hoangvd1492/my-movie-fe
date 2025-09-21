@@ -15,7 +15,7 @@ export default async function Page({ searchParams }) {
             <div className="font-[700] text-3xl text-primary self-start  w-fit text-header py-2 px-8">
                 <span>Anime TV Show</span>
             </div>
-            <MovieList data={moviesList.data} />
+            <MovieList data={moviesList.data} type={'tv'} />
 
             <div className="w-fit">
                 <Pagination page={moviesList.page} total={moviesList.total} />

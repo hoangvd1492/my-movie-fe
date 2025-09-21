@@ -1,9 +1,10 @@
 import { Play } from "lucide-react"
 import Link from "next/link"
 
-export const Card = ({ data }) => {
+export const Card = ({ data, type }) => {
+
     return (
-        <Link href={`/movie/${data.id}`}>
+        <Link href={`/${type}/${data.id}`}>
             <div className={`card flex flex-col flex-none gap-4  justify-start rounded-[4px] w-[150px] h-[300px] select-none transition-all  max-lg:m-0`}>
                 <div className={`group rounded-[4px] h-[200px] w-full relative  hover:shadow-[0_0_10px_0_rgba(0,0,0,0.3)] shadow-primary   max-lg:shadow-[0_0_5px_0_rgba(0,0,0,0.3)]`}>
                     <img draggable={false} className={`absolute top-0 left-0 h-[200px]  w-full object-cover cursor-pointer rounded-[4px]`}
