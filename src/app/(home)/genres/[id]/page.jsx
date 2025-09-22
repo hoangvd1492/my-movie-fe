@@ -30,7 +30,6 @@ export default async function Page({ params, searchParams }) {
         </div>)
     }
 
-    console.log(moviesList);
 
 
     return (

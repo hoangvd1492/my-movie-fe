@@ -1,9 +1,9 @@
 import { Montserrat } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "./component/theme/ThemeProvider";
-import { Header } from "./component/ui/header";
-import { tmdbService } from "./_lib/service/tmdbService";
-import { Footer } from "./component/ui/footer";
+import "@/app/globals.css";
+import { ThemeProvider } from "../component/theme/ThemeProvider";
+import { Header } from "../component/ui/header";
+import { tmdbService } from "@/app/_lib/service/tmdbService";
+import { Footer } from "../component/ui/footer";
 
 export const montserrat = Montserrat({
   subsets: ['latin'], // Specify required subsets

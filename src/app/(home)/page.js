@@ -1,8 +1,8 @@
-import { Anime } from "./component/section/Anime";
-import { AnimeShow } from "./component/section/AnimeShow";
-import { Banner } from "./component/section/Banner";
-import { Movie } from "./component/section/Movie";
-import { TVShow } from "./component/section/TvShow";
+import { Anime } from "../component/section/Anime";
+import { AnimeShow } from "../component/section/AnimeShow";
+import { Banner } from "../component/section/Banner";
+import { Movie } from "../component/section/Movie";
+import { TVShow } from "@/app/component/section/TvShow";
 
 export const metadata = {
   title: "MY MOVIE | Trang Chủ",
