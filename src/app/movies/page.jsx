@@ -3,7 +3,10 @@ import { tmdbService } from "../_lib/service/tmdbService";
 import { Pagination } from "../component/ui/Pagination";
 import { MovieList } from "../component/ui/MovieList";
 
-
+export const metadata = {
+    title: "MY MOVIE | Movie",
+    description: "My Movie - stream movie and tv use data from TMDB!",
+};
 
 export default async function Page({ searchParams }) {
 

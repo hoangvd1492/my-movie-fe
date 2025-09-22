@@ -107,6 +107,12 @@ export const Header = ({ genres = [] }) => {
                         <div className='p-2 hidden max-xl:block cursor-pointer' onClick={() => setOpenDropDown(!openDropDown)}>
                             {!openDropDown ? <Menu /> : <X />}
                         </div>
+                        <div className="flex flex-row gap-1 max-xl:hidden">
+                            <Link href={'/movies'}>
+                                <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
+                                    Đăng nhập
+                                </div></Link>
+                        </div>
                     </div>
                 </div>
                 {openDropDown && <div className="absolute top-[100%] flex flex-col gap-1 hidden max-xl:block border-t-1 border-foreground bg-primary w-full">
@@ -124,6 +130,11 @@ export const Header = ({ genres = [] }) => {
                     <Link href={'/anime'}>
                         <div className="  font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Anime
+                        </div>
+                    </Link>
+                    <Link href={'/animeshow'}>
+                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
+                            Đăng nhập
                         </div>
                     </Link>
                     <Link href={'/animeshow'}>

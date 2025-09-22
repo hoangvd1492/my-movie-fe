@@ -4,7 +4,17 @@ import { Player } from "@/app/component/ui/player";
 import { Clapperboard, Clock, PlayIcon, Popcorn, Sparkles, Video } from "lucide-react";
 import Link from "next/link";
 
+export async function generateMetadata(
+    { params }
+) {
+    const { id = 0 } = await params
+    const movieDetail = await tmdbService.getDetailMovie(Number(id))
 
+    return {
+        title: `MY MOVIE | ${movieDetail.title}`,
+
+    }
+}
 
 
 export default async function Page({ params }) {

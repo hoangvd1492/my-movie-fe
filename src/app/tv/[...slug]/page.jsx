@@ -8,6 +8,19 @@ import Link from "next/link";
 /tv/:showTvId/:ssId/:esId
 */
 
+export async function generateMetadata(
+    { params }
+) {
+    const { slug = [] } = await params
+    const [tvId, seasonNumber, epNumber] = slug
+    const movieDetail = await tmdbService.getDetailTv(Number(tvId))
+
+    return {
+        title: `MY MOVIE | ${movieDetail.name}`,
+
+    }
+}
+
 
 export default async function Page({ params }) {
 

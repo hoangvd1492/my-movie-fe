@@ -4,6 +4,10 @@ import { Banner } from "./component/section/Banner";
 import { Movie } from "./component/section/Movie";
 import { TVShow } from "./component/section/TvShow";
 
+export const metadata = {
+  title: "MY MOVIE | Trang Chủ",
+  description: "My Movie - stream movie and tv use data from TMDB!",
+};
 export default function Home() {
 
   return (
