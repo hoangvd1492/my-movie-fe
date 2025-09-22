@@ -87,6 +87,10 @@ body {
   animation: loading 2s infinite ease-in-out;
 }
 
+input {
+  outline: none;
+}
+
 
 
 

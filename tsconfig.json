@@ -34,8 +34,10 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/app/component/ui/HorizontalScrollDiv.jsx"
-, "src/app/component/ui/loading.jsx"  ],
+    "src/app/component/ui/HorizontalScrollDiv.jsx",
+    "src/app/component/ui/loading.jsx",
+    "src/app/(auth)/login/layout.jsx"
+  ],
   "exclude": [
     "node_modules"
   ]
