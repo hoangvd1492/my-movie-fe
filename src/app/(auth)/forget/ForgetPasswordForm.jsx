@@ -34,7 +34,7 @@ export const ForgetPasswordForm = () => {
                     Đăng nhập
                 </div>
             </Link>
-            <Link href={'/signin'}>
+            <Link href={'/signup'}>
                 <div className="hover:bg-primary-hover w-full py-2 rounded-[4px] cursor-pointer text-sm font-[500] text-center">
                     Đăng ký
                 </div>

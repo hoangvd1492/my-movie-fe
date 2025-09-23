@@ -1,4 +1,4 @@
-import { SignInForm } from "./SignInForm";
+import { SignUpForm } from "./SignUpForm";
 
 export default function Page() {
     return (
@@ -7,7 +7,7 @@ export default function Page() {
                 <div className="text-2xl font-[700]">
                     ĐĂNG KÝ
                 </div>
-                <SignInForm />
+                <SignUpForm />
             </div>
         </div>
     )
