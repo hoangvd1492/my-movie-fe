@@ -5,7 +5,7 @@ import { Card } from "./Card"
 */
 export const MovieList = async ({ data, type = '' }) => {
     return (
-        <div className="flex flex-wrap items-center w-fit">
+        <div className="flex flex-wrap items-start w-fit gap-y-8">
             {data.map((movie, index) => {
                 return (
                     <Card key={index} data={movie} type={movie.media_type ?? type} />

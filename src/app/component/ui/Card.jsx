@@ -5,7 +5,7 @@ export const Card = ({ data, type }) => {
 
     return (
 
-        <div className={`card flex-none gap-4 p-4  rounded-[4px] h-fit select-none transition-all w-[16%] max-lg:w-[25%] max-sm:w-[50%] `}>
+        <div className={`card flex-none gap-4 px-4  rounded-[4px] h-fit select-none transition-all w-[16%] max-lg:w-[25%] max-sm:w-[50%] `}>
             <Link href={`/${type}/${data.id}`} >
                 <div className="flex flex-col  gap-4">
                     <div className={`group relative  rounded-[4px] h-[256px]  w-full  hover:shadow-[0_0_10px_0_rgba(0,0,0,0.3)] shadow-primary   max-lg:shadow-[0_0_5px_0_rgba(0,0,0,0.3)]`}>

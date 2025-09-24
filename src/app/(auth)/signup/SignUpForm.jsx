@@ -1,15 +1,25 @@
 "use client"
 
+import { signup } from "@/app/_lib/redux/slices/authSlice";
 import { AuthService } from "@/app/_lib/service/authService";
 import { SignUpSchema } from "@/app/_lib/zod/auth.schema";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const SignUpForm = () => {
+
+
+    const router = useRouter()
+    const dispatch = useDispatch();
 
     const [showPassword, setShowPassword] = useState(false)
     const [data, setData] = useState({ username: '', email: '', password: '', passwordConfirm: '' })
     const [err, setErr] = useState(null)
+
+    const [loading, setLoading] = useState(false);
+    const { error } = useSelector((state) => state.auth);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -25,12 +35,13 @@ export const SignUpForm = () => {
             return
         }
 
-        AuthService.signup(data.username, data.email, data.password).then(res => {
-            console.log(res);
-
-        }).catch(err => {
-            console.log(err);
-        })
+        dispatch(signup({ username: data.username, email: data.email, password: data.password })).unwrap()
+            .then(() => {
+                router.push('/')
+            })
+            .catch(() => {
+                setLoading(false);
+            });
 
     }
     return (
@@ -92,6 +103,7 @@ export const SignUpForm = () => {
                         }} />
                     {err?.passwordConfirm && <div className="text-[red] w-[256px] text-sm">{err.passwordConfirm}</div>}
                 </div>
+                {error && <div className="text-[red] w-[256px] text-sm">{error}</div>}
                 <div className="flex flex-row gap-2 justify-start items-center ">
                     <input id="checkbox" type="checkbox" value={showPassword} className="w-4 h-4 text-blue-600 bg-gray-100 border-primary-hovercursor-pointer"
                         onChange={() => setShowPassword(!showPassword)} />

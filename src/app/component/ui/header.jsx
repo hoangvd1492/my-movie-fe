@@ -1,19 +1,27 @@
 "use client"
-import { Menu, Search, X } from 'lucide-react';
+import { Heart, LogOut, Menu, Search, User, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
 import { ThemeBtn } from '../theme/ThemeButton';
 import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '@/app/_lib/redux/slices/authSlice';
 
 export const Header = ({ genres = [] }) => {
 
     const router = useRouter()
+    const dispatch = useDispatch();
+
 
     const [openDropDown, setOpenDropDown] = useState(false)
     const [transpentBg, setTranspentBg] = useState(false)
+    const [openUserDropDown, setOpenUserDropDown] = useState(false)
+    const [mounted, setMount] = useState(false)
 
+    const { isLoggedIn, user } = useSelector((state) => state.auth);
 
     useEffect(() => {
+        setMount(true)
         const scroll = () => {
             var B = document.body;
             var D = document.documentElement;
@@ -29,7 +37,7 @@ export const Header = ({ genres = [] }) => {
         window.addEventListener('scroll', scroll)
 
         return () => {
-            window.removeEventListener('scroll')
+            window.removeEventListener('scroll', scroll)
         }
     }, [])
 
@@ -38,6 +46,10 @@ export const Header = ({ genres = [] }) => {
     const handleSearch = () => {
         if (!searchText.trim()) return
         router.push(`/search?q=${searchText}`)
+    }
+
+    const handleLogOut = () => {
+        dispatch(logout())
     }
 
 
@@ -104,15 +116,42 @@ export const Header = ({ genres = [] }) => {
                             </div>
                         </div>
                         <ThemeBtn />
+                        <div className="flex flex-row gap-1">
+                            {mounted && isLoggedIn ?
+                                <div className='relative cursor-pointer ' >
+                                    <div onClick={(e) => {
+                                        setOpenUserDropDown(!openUserDropDown)
+                                    }}>
+                                        <User />
+                                    </div>
+                                    <div className={`absolute top-[200%] right-0 text-sm font-[500] bg-primary rounded-[4px] shadow-[0_0_10px_0] shadow-primary ${openUserDropDown ? 'block' : 'hidden'}`}>
+                                        <div className='w-[128px] flex flex-col py-2'>
+                                            <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center'>
+                                                <User />  {user?.username}
+                                            </div>
+                                            <Link href={'/favorite'}>
+                                                <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center'>
+                                                    <Heart />  Yêu thích
+                                                </div>
+                                            </Link>
+                                            <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center'
+                                                onClick={handleLogOut}>
+                                                <LogOut /> Đăng xuất
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> :
+                                <Link href={'/login'}>
+                                    <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
+                                        Đăng nhập
+                                    </div>
+                                </Link>
+                            }
+                        </div>
                         <div className='p-2 hidden max-xl:block cursor-pointer' onClick={() => setOpenDropDown(!openDropDown)}>
                             {!openDropDown ? <Menu /> : <X />}
                         </div>
-                        <div className="flex flex-row gap-1 max-xl:hidden">
-                            <Link href={'/movies'}>
-                                <div className="font-[500]  py-2 px-4 cursor-pointer rounded-[4px] hover:bg-primary-hover">
-                                    Đăng nhập
-                                </div></Link>
-                        </div>
+
                     </div>
                 </div>
                 {openDropDown && <div className="absolute top-[100%] flex flex-col gap-1 hidden max-xl:block border-t-1 border-foreground bg-primary w-full">
@@ -132,7 +171,7 @@ export const Header = ({ genres = [] }) => {
                             Anime
                         </div>
                     </Link>
-                    <Link href={'/animeshow'}>
+                    <Link href={'/login'}>
                         <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
                             Đăng nhập
                         </div>

@@ -1,18 +1,30 @@
 "use client"
 
-import { AuthService } from "@/app/_lib/service/authService";
 import { LogInSchema } from "@/app/_lib/zod/auth.schema";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useState } from "react";
+import { login } from "@/app/_lib/redux/slices/authSlice";
+import { useRouter } from "next/navigation";
 
 export const LogInForm = () => {
 
+
+    const router = useRouter()
+    const dispatch = useDispatch();
+
     const [showPassword, setShowPassword] = useState(false)
     const [data, setData] = useState({ email: '', password: '' })
+    const [loading, setLoading] = useState(false);
     const [err, setErr] = useState(null)
+
+    const { error } = useSelector((state) => state.auth);
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        setLoading(true);
         const validated = LogInSchema.safeParse({
             email: data.email,
             password: data.password
@@ -23,12 +35,13 @@ export const LogInForm = () => {
             return
         }
 
-        AuthService.login(data.email, data.password).then(res => {
-            console.log(res);
-
-        }).catch(err => {
-            console.log(err);
-        })
+        dispatch(login({ email: data.email, password: data.password })).unwrap()
+            .then(() => {
+                router.push('/')
+            })
+            .catch(() => {
+                setLoading(false);
+            });
 
     }
 
@@ -63,6 +76,7 @@ export const LogInForm = () => {
                         }} />
                     {err?.password && <div className="text-[red] w-[256px] text-sm">{err.password}</div>}
                 </div>
+                {error && <div className="text-[red] w-[256px] text-sm">{error}</div>}
                 <div className="flex flex-row gap-2 justify-start items-center ">
                     <input id="checkbox" type="checkbox" value={showPassword} className="w-4 h-4 text-blue-600 bg-gray-100 border-primary-hovercursor-pointer"
                         onChange={() => setShowPassword(!showPassword)} />
@@ -73,7 +87,7 @@ export const LogInForm = () => {
                         Quên mật khẩu?
                     </div>
                 </Link>
-                <button className="hover:bg-primary-hover w-full py-2 rounded-[4px] cursor-pointer text-sm font-[500]">Đăng nhập</button>
+                <button className="hover:bg-primary-hover w-full py-2 rounded-[4px] cursor-pointer text-sm font-[500]" disabled={loading}>Đăng nhập</button>
             </form>
             <div className="border-1 border-b-[white] my-2">
 

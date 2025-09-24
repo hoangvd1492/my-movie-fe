@@ -36,7 +36,7 @@
     "**/*.tsx",
     "src/app/component/ui/HorizontalScrollDiv.jsx",
     "src/app/component/ui/loading.jsx",
-    "src/app/(auth)/login/layout.jsx"
+    "src/app/(auth)/layout.jsx"
   ],
   "exclude": [
     "node_modules"

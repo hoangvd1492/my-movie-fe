@@ -16,7 +16,7 @@ export const TVShow = async () => {
                 </div>
             </Link>
             <Horizontal>
-                <div className="flex flex-row gap-8 max-lg:gap-4 w-full items-center p-8">
+                <div className="flex flex-row gap-4 max-lg:gap-2 w-full items-start p-8">
                     {movieList.data.map((movie, index) => {
                         return (
                             <Card key={index} data={movie} type={'tv'} />

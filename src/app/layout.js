@@ -1,6 +1,8 @@
 import { Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/app/component/theme/ThemeProvider";
+import { StoreProvider } from "./component/StoreProvider";
+import { AuthWrapper } from "./component/AuthWrapper";
 
 export const montserrat = Montserrat({
   subsets: ['latin'], // Specify required subsets
@@ -24,7 +26,11 @@ export default async function RootLayout({ children }) {
 
       >
         <ThemeProvider defaultTheme="dark">
-          {children}
+          <StoreProvider>
+            <AuthWrapper>
+              {children}
+            </AuthWrapper>
+          </StoreProvider>
         </ThemeProvider>
       </body>
     </html>
