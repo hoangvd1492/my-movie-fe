@@ -1,4 +1,4 @@
-import { ResetFormForm } from "./ResetForm";
+import { ResetPasswordForm } from "./ResetPasswordForm";
 
 export default function Page() {
     return (
@@ -7,7 +7,7 @@ export default function Page() {
                 <div className="text-2xl font-[700]">
                     ĐỔI MẬT KHẨU
                 </div>
-                <ResetFormForm />
+                <ResetPasswordForm />
             </div>
         </div>
     )

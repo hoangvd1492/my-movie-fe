@@ -1,4 +1,5 @@
-import { apiFetch } from "../helper/apiFetch";
+import isNetworkError from "is-network-error";
+import { fetchRetry } from "../helper/fetchRetry";
 
 const URL = process.env.NEXT_PUBLIC_SERVER_URL
 
@@ -39,10 +40,57 @@ export const AuthService = {
     },
 
     logout: async () => {
-        const response = await apiFetch("/auth/logout", {
+        const response = await fetchRetry("/auth/logout", {
             method: "POST",
             credentials: "include",
         });
         return response
+    },
+
+    requestResetPassword: async (email) => {
+        try {
+            const response = await fetch(`${URL}/auth/password/email`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email })
+            });
+            if (!response.ok) {
+                throw await response.json();
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            if (isNetworkError(error)) {
+                throw { message: "Lỗi mạng! Vui lòng thử lại sau!" };
+            }
+            throw error;
+        }
+
+    },
+
+    resetPassword: async (password, token) => {
+        try {
+            const response = await fetch(`${URL}/auth/password/reset`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password: password, token: token })
+            });
+            if (!response.ok) {
+                throw await response.json();
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            if (isNetworkError(error)) {
+                throw { message: "Lỗi mạng! Vui lòng thử lại sau!" };
+            }
+            throw error;
+        }
     }
 }

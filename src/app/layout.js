@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import { ThemeProvider } from "@/app/component/theme/ThemeProvider";
 import { StoreProvider } from "./component/StoreProvider";
 import { AuthWrapper } from "./component/AuthWrapper";
+import { ReactQueryWrapper } from "./component/ReactQueryWrapper";
 
 export const montserrat = Montserrat({
   subsets: ['latin'], // Specify required subsets
@@ -27,9 +28,11 @@ export default async function RootLayout({ children }) {
       >
         <ThemeProvider defaultTheme="dark">
           <StoreProvider>
-            <AuthWrapper>
-              {children}
-            </AuthWrapper>
+            <ReactQueryWrapper>
+              <AuthWrapper>
+                {children}
+              </AuthWrapper>
+            </ReactQueryWrapper>
           </StoreProvider>
         </ThemeProvider>
       </body>

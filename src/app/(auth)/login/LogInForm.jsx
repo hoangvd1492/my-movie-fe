@@ -3,8 +3,8 @@
 import { LogInSchema } from "@/app/_lib/zod/auth.schema";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { useState } from "react";
-import { login } from "@/app/_lib/redux/slices/authSlice";
+import { useEffect, useState } from "react";
+import { clearError, login } from "@/app/_lib/redux/slices/authSlice";
 import { useRouter } from "next/navigation";
 
 export const LogInForm = () => {
@@ -24,7 +24,7 @@ export const LogInForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        setLoading(true);
+        if (loading) return
         const validated = LogInSchema.safeParse({
             email: data.email,
             password: data.password
@@ -34,7 +34,7 @@ export const LogInForm = () => {
             setErr(validated.error.flatten().fieldErrors)
             return
         }
-
+        setLoading(true);
         dispatch(login({ email: data.email, password: data.password })).unwrap()
             .then(() => {
                 router.push('/')
@@ -44,6 +44,10 @@ export const LogInForm = () => {
             });
 
     }
+
+    useEffect(() => {
+        dispatch(clearError());
+    }, [])
 
     return (
         <div>
@@ -76,18 +80,21 @@ export const LogInForm = () => {
                         }} />
                     {err?.password && <div className="text-[red] w-[256px] text-sm">{err.password}</div>}
                 </div>
-                {error && <div className="text-[red] w-[256px] text-sm">{error}</div>}
+                {error && <div className="text-[red] w-[256px] text-sm font-[700]">{error}</div>}
                 <div className="flex flex-row gap-2 justify-start items-center ">
                     <input id="checkbox" type="checkbox" value={showPassword} className="w-4 h-4 text-blue-600 bg-gray-100 border-primary-hovercursor-pointer"
                         onChange={() => setShowPassword(!showPassword)} />
                     <label htmlFor="checkbox" className=" text-sm font-medium cursor-pointer">Hiện mật khẩu</label>
                 </div>
-                <Link href={'/forget'}>
+                <Link href={'/forget'} target="_blank"  >
                     <div className="text-sm font-medium hover:underline">
                         Quên mật khẩu?
                     </div>
                 </Link>
-                <button className="hover:bg-primary-hover w-full py-2 rounded-[4px] cursor-pointer text-sm font-[500]" disabled={loading}>Đăng nhập</button>
+                <button className={`hover:bg-primary-hover w-full py-2 rounded-[4px] cursor-pointer text-sm font-[500] flex justify-center items-center ${loading ? 'bg-primary-hover' : ''}`} disabled={loading}>
+
+                    {loading ? <span className="loader"></span> : 'Đăng nhập'}
+                </button>
             </form>
             <div className="border-1 border-b-[white] my-2">
 

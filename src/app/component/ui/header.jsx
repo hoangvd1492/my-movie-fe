@@ -118,15 +118,15 @@ export const Header = ({ genres = [] }) => {
                         <ThemeBtn />
                         <div className="flex flex-row gap-1">
                             {mounted && isLoggedIn ?
-                                <div className='relative cursor-pointer ' >
+                                <div className='relative cursor-pointer' >
                                     <div onClick={(e) => {
                                         setOpenUserDropDown(!openUserDropDown)
                                     }}>
                                         <User />
                                     </div>
-                                    <div className={`absolute top-[200%] right-0 text-sm font-[500] bg-primary rounded-[4px] shadow-[0_0_10px_0] shadow-primary ${openUserDropDown ? 'block' : 'hidden'}`}>
-                                        <div className='w-[128px] flex flex-col py-2'>
-                                            <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center'>
+                                    <div className={`absolute top-[200%] right-0 text-sm font-[500] bg-primary rounded-[4px] shadow-[0_0_10px_0] shadow-primary  text-[white] ${openUserDropDown ? 'block' : 'hidden'}`}>
+                                        <div className=' flex flex-col py-2'>
+                                            <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center ' >
                                                 <User />  {user?.username}
                                             </div>
                                             <Link href={'/favorite'}>

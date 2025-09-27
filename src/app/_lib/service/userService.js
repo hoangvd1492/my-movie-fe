@@ -1,13 +1,18 @@
-import { apiFetch } from "../helper/apiFetch";
+import { fetchRetry } from "../helper/fetchRetry";
 
 const URL = process.env.NEXT_PUBLIC_SERVER_URL
 
 export const UserService = {
     fetchProfile: async () => {
-        const response = await apiFetch(`/user/me`, {
+        const response = await fetchRetry(`/user/me`, {
             method: 'POST',
         });
 
-        return response
+        if (!response.ok) {
+            throw await response.json();
+        }
+
+        const data = await response.json();
+        return data;
     }
 }

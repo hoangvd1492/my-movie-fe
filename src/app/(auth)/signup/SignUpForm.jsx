@@ -1,11 +1,11 @@
 "use client"
 
-import { signup } from "@/app/_lib/redux/slices/authSlice";
+import { clearError, signup } from "@/app/_lib/redux/slices/authSlice";
 import { AuthService } from "@/app/_lib/service/authService";
 import { SignUpSchema } from "@/app/_lib/zod/auth.schema";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export const SignUpForm = () => {
@@ -23,6 +23,7 @@ export const SignUpForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if (loading) return
         const validated = SignUpSchema.safeParse({
             username: data.username,
             email: data.email,
@@ -34,7 +35,7 @@ export const SignUpForm = () => {
             setErr(validated.error.flatten().fieldErrors)
             return
         }
-
+        setLoading(true);
         dispatch(signup({ username: data.username, email: data.email, password: data.password })).unwrap()
             .then(() => {
                 router.push('/')
@@ -44,6 +45,11 @@ export const SignUpForm = () => {
             });
 
     }
+
+    useEffect(() => {
+        dispatch(clearError());
+    }, [])
+
     return (
         <div>
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -103,13 +109,21 @@ export const SignUpForm = () => {
                         }} />
                     {err?.passwordConfirm && <div className="text-[red] w-[256px] text-sm">{err.passwordConfirm}</div>}
                 </div>
-                {error && <div className="text-[red] w-[256px] text-sm">{error}</div>}
+                <Link href={'/forget'} target="_blank"  >
+                    <div className="text-sm font-medium hover:underline">
+                        Quên mật khẩu?
+                    </div>
+                </Link>
+                {error && <div className="text-[red] w-[256px] text-sm font-[700]">{error}</div>}
                 <div className="flex flex-row gap-2 justify-start items-center ">
                     <input id="checkbox" type="checkbox" value={showPassword} className="w-4 h-4 text-blue-600 bg-gray-100 border-primary-hovercursor-pointer"
                         onChange={() => setShowPassword(!showPassword)} />
                     <label htmlFor="checkbox" className=" text-sm font-medium cursor-pointer">Hiện mật khẩu</label>
                 </div>
-                <button className="hover:bg-primary-hover w-full py-2 rounded-[4px] cursor-pointer text-sm font-[500]">Đăng ký</button>
+                <button className={`hover:bg-primary-hover w-full py-2 rounded-[4px] cursor-pointer text-sm font-[500] flex justify-center items-center ${loading ? 'bg-primary-hover' : ''}`} disabled={loading}>
+
+                    {loading ? <span className="loader"></span> : 'Đăng ký'}
+                </button>
             </form>
             <div className="border-1 border-b-[white] my-2">
 
