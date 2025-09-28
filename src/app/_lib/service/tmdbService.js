@@ -1,6 +1,6 @@
 const baseUrl = `https://api.themoviedb.org/3`
 
-const KEY = process.env.NEXT_APP_TMDB_API_KEY
+const KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY
 
 export const tmdbService = {
     getAllGenre: async () => {

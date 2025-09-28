@@ -116,21 +116,23 @@ export const Header = ({ genres = [] }) => {
                             </div>
                         </div>
                         <ThemeBtn />
-                        <div className="flex flex-row gap-1">
+                        <div className="flex flex-row gap-1 max-lg:hidden">
                             {mounted && isLoggedIn ?
-                                <div className='relative cursor-pointer' >
+                                <div className='relative cursor-pointer ' >
                                     <div onClick={(e) => {
                                         setOpenUserDropDown(!openUserDropDown)
                                     }}>
                                         <User />
                                     </div>
-                                    <div className={`absolute top-[200%] right-0 text-sm font-[500] bg-primary rounded-[4px] shadow-[0_0_10px_0] shadow-primary  text-[white] ${openUserDropDown ? 'block' : 'hidden'}`}>
+                                    <div className={`absolute top-[200%] right-0 min-w-[200px] text-sm font-[500] bg-primary rounded-[4px] shadow-[0_0_10px_0] shadow-primary  text-[white] ${openUserDropDown ? 'block' : 'hidden'}`}>
                                         <div className=' flex flex-col py-2'>
-                                            <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center ' >
+                                            <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center '
+                                                onClick={() => setOpenUserDropDown(false)}>
                                                 <User />  {user?.username}
                                             </div>
-                                            <Link href={'/favorite'}>
-                                                <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center'>
+                                            <Link href={'/favorites'}>
+                                                <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center'
+                                                    onClick={() => setOpenUserDropDown(false)}>
                                                     <Heart />  Yêu thích
                                                 </div>
                                             </Link>
@@ -155,6 +157,14 @@ export const Header = ({ genres = [] }) => {
                     </div>
                 </div>
                 {openDropDown && <div className="absolute top-[100%] flex flex-col gap-1 hidden max-xl:block border-t-1 border-foreground bg-primary w-full">
+                    {mounted && isLoggedIn ?
+                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover"
+                            onClick={() => setOpenUserDropDown(false)}>
+                            {user?.username}
+                        </div>
+
+                        : <></>}
+
 
                     <Link href={'/movies'}>
                         <div className=" font-[500] p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
@@ -171,16 +181,33 @@ export const Header = ({ genres = [] }) => {
                             Anime
                         </div>
                     </Link>
-                    <Link href={'/login'}>
-                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
-                            Đăng nhập
-                        </div>
-                    </Link>
                     <Link href={'/animeshow'}>
-                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover">
-                            Thể loại
+                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover" >
+                            AnimeTV
                         </div>
                     </Link>
+
+
+
+                    {mounted && isLoggedIn ?
+                        <>
+
+                            <Link href={'/favorites'}>
+                                <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
+                                    Yêu thích
+                                </div>
+                            </Link>
+                            <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover"
+                                onClick={handleLogOut}>
+                                Đăng xuất
+                            </div>
+                        </>
+                        :
+                        <Link href={'/login'}>
+                            <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover" onClick={() => setOpenDropDown(false)}>
+                                Đăng nhập
+                            </div>
+                        </Link>}
 
                     <div className=' text-[white] w-full bg-primary p-2 grid grid-cols-3 gap-2 text-sm  border-t-1 border-foreground'>
                         {

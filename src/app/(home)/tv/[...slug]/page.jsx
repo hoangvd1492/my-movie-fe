@@ -1,5 +1,6 @@
 
 import { tmdbService } from "@/app/_lib/service/tmdbService";
+import { FavoriteButton } from "@/app/component/ui/FavoriteBtn";
 import { Player } from "@/app/component/ui/player";
 import { Clapperboard, Clock, PlayIcon, Popcorn, Sparkles, Video } from "lucide-react";
 import Link from "next/link";
@@ -103,6 +104,7 @@ export default async function Page({ params }) {
                                     <Popcorn />   <span className="max-xl:hidden" >Xem Trailer</span>
                                 </div>
                             </Link>}
+                            <FavoriteButton mediaId={movieDetail.id} type={'tv'} />
                         </div>
                     </div>
                 </div>
@@ -140,7 +142,7 @@ export default async function Page({ params }) {
                     <div className="my-16">
                         <div className="text-xl font-[700] text-primary">Bạn đang xem {seasonDetail.name} - Tập {detailEp.episode_number}: {detailEp.name}</div>
                         <div id="player" className=" w-full px-8 max-lg:px-2 my-8">
-                            <Player embedUrl={`https://multiembed.mov/?video_id=${encodeURIComponent(tvId)}&tmdb=1&s=${encodeURIComponent(seasonNumber)}&e=${encodeURIComponent(epNumber)}`} />
+                            <Player embedUrl={`https://multiembed.mov/directstream.php?video_id=${encodeURIComponent(tvId)}&tmdb=1&s=${encodeURIComponent(seasonNumber)}&e=${encodeURIComponent(epNumber)}`} />
                         </div>
                     </div>
                 }
