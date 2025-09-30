@@ -126,10 +126,12 @@ export const Header = ({ genres = [] }) => {
                                     </div>
                                     <div className={`absolute top-[200%] right-0 min-w-[200px] text-sm font-[500] bg-primary rounded-[4px] shadow-[0_0_10px_0] shadow-primary  text-[white] ${openUserDropDown ? 'block' : 'hidden'}`}>
                                         <div className=' flex flex-col py-2'>
-                                            <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center '
-                                                onClick={() => setOpenUserDropDown(false)}>
-                                                <User />  {user?.username}
-                                            </div>
+
+                                            <Link href={'/me'}>
+                                                <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center '
+                                                    onClick={() => setOpenUserDropDown(false)}>
+                                                    <User />  {user?.username}
+                                                </div></Link>
                                             <Link href={'/favorites'}>
                                                 <div className='p-2 hover:bg-primary-hover  flex gap-2 flex-row items-center'
                                                     onClick={() => setOpenUserDropDown(false)}>
@@ -158,11 +160,13 @@ export const Header = ({ genres = [] }) => {
                 </div>
                 {openDropDown && <div className="absolute top-[100%] flex flex-col gap-1 hidden max-xl:block border-t-1 border-foreground bg-primary w-full">
                     {mounted && isLoggedIn ?
-                        <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover"
-                            onClick={() => setOpenUserDropDown(false)}>
-                            {user?.username}
-                        </div>
+                        <Link href={'/me'}>
+                            <div className=" font-[500]  p-4 cursor-pointer hover:bg-primary-hover"
+                                onClick={() => setOpenUserDropDown(false)}>
+                                {user?.username}
+                            </div>
 
+                        </Link>
                         : <></>}
 
 

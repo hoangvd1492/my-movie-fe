@@ -5,6 +5,7 @@ import { StoreProvider } from "./component/StoreProvider";
 import { AuthWrapper } from "./component/AuthWrapper";
 import { ReactQueryWrapper } from "./component/ReactQueryWrapper";
 
+
 export const montserrat = Montserrat({
   subsets: ['latin'], // Specify required subsets
   variable: '--font-montserrat', // Define a CSS variable for easier use
@@ -26,6 +27,7 @@ export default async function RootLayout({ children }) {
         className={`${montserrat.variable} ${montserrat.variable} antialiased `}
 
       >
+        <div id="fb-root"></div>
         <ThemeProvider defaultTheme="dark">
           <StoreProvider>
             <ReactQueryWrapper>

@@ -11,6 +11,8 @@ export const AuthWrapper = ({ children }) => {
 
     const authPathname = ["/login", "/signup"];
 
+    const privatePathname = ['/me']
+
     const pathname = usePathname();
     const router = useRouter();
     const dispatch = useDispatch()
@@ -33,6 +35,8 @@ export const AuthWrapper = ({ children }) => {
     useEffect(() => {
         if (isLoggedIn && authPathname.includes(pathname)) {
 
+            router.replace("/");
+        } else if (!isLoggedIn && privatePathname.includes(pathname)) {
             router.replace("/");
         } else {
             setAllowed(true);

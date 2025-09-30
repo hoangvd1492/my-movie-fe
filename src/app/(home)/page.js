@@ -1,3 +1,4 @@
+import FacebookComments from "../component/section/A&Q";
 import { Anime } from "../component/section/Anime";
 import { AnimeShow } from "../component/section/AnimeShow";
 import { Banner } from "../component/section/Banner";
@@ -18,6 +19,7 @@ export default function Home() {
         <TVShow />
         <Anime />
         <AnimeShow />
+        <FacebookComments />
       </div>
     </div>
   );
