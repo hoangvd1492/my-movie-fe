@@ -6,6 +6,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
+  --color-chat-message-bg-color: var(--chat-message-bg-color)
 }
 
 @layer utilities {
@@ -23,7 +24,7 @@
   --foreground: #171717;
   --primary: #9147ff;
   --primary-hover: #680bf3;
-
+  --chat-message-bg-color: #f1f1f1
 }
 
 .dark {
@@ -31,6 +32,7 @@
   --foreground: #ededed;
   --primary: #9147ff;
   --primary-hover: #680bf3;
+  --chat-message-bg-color: #3f3f3f
 }
 
 :root {
@@ -103,6 +105,24 @@ input {
   animation: rotation 1s linear infinite;
 }
 
+.fade-in {
+  animation: chatBoxFadeIn 0.3s ease-in-out;
+}
+
+@keyframes chatBoxFadeIn {
+  0% {
+    transform: translateX(100%) scale(0.95);
+    opacity: 0;
+
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -112,9 +132,6 @@ input {
     transform: rotate(360deg);
   }
 }
-
-
-
 
 @keyframes loading {
   0% {

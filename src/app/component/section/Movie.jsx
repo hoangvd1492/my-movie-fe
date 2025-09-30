@@ -16,7 +16,7 @@ export const Movie = async () => {
             </Link>
 
             <Horizontal>
-                <div className="flex flex-row gap-4 max-lg:gap-2 w-full items-start p-8">
+                <div className="flex flex-row w-full items-start px-2 py-8 gap-4 max-sm:gap-0">
                     {movieList.data.map((movie, index) => {
                         return (
                             <Card key={index} data={movie} type={'movie'} />

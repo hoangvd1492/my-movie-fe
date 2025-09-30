@@ -2,6 +2,7 @@
 import { Header } from "../component/ui/header";
 import { tmdbService } from "@/app/_lib/service/tmdbService";
 import { Footer } from "../component/ui/footer";
+import ChatBot from "../component/ui/ChatBot";
 
 
 
@@ -20,6 +21,7 @@ export default async function RootLayout({ children }) {
       <div className="min-h-screen">
         {children}
       </div>
+      <ChatBot />
       <Footer />
     </div>
   );
